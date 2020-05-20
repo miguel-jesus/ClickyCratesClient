@@ -1,18 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Login : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public InputField emailInputField;
+    public InputField passwordInputField;
+    public Button loginButton;
+    public Button logoutButton;
+    public Button playGameButton;
+    public Text messageBoardText;
+    public Player player;
+
+    public void OnLoginButtonClicked()
     {
-        
+        StartCoroutine(TryLogin());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator TryLogin()
     {
-        
+        yield return Helper.InitializeToken(emailInputField.text, passwordInputField.text);
+        yield return Helper.GetPlayerInfo();
+        //yield return RegistrarLogin();
+        messageBoardText.text += "\nWelcome " + player.FirstName + ". You are logged in!";
+        loginButton.interactable = false;
+        logoutButton.interactable = true;
+        playGameButton.interactable = true;
     }
+
+
+  
 }

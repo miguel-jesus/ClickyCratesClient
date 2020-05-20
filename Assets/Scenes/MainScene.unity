@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 67903608}
   - component: {fileID: 67903607}
   - component: {fileID: 67903606}
+  - component: {fileID: 67903609}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -344,7 +345,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 67903607}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 67903609}
+        m_MethodName: OnQuitGameButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &67903607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +392,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67903604}
   m_CullTransparentMesh: 0
+--- !u!114 &67903609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67903604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b685569dcd77434eb468e7c7a3c7535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &97671419
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +752,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 220795026}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1084748005}
+        m_MethodName: OnRegisterButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &220795026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,6 +1417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 556536600}
   - component: {fileID: 556536601}
+  - component: {fileID: 556536602}
   m_Layer: 5
   m_Name: Login
   m_TagString: Untagged
@@ -1436,6 +1472,25 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &556536602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556536599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6645692c80519b44583f597bf303f858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emailInputField: {fileID: 97671421}
+  passwordInputField: {fileID: 1916547043}
+  loginButton: {fileID: 1582653782}
+  logoutButton: {fileID: 1883810702}
+  playGameButton: {fileID: 1805572743}
+  messageBoardText: {fileID: 603521528}
+  player: {fileID: 2137388936}
 --- !u!1 &596309767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,6 +2278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1084748003}
   - component: {fileID: 1084748004}
+  - component: {fileID: 1084748005}
   m_Layer: 0
   m_Name: Register
   m_TagString: Untagged
@@ -2281,6 +2337,28 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &1084748005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084748002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f030ec0401aad43b6e167d8e1fd081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstNameInputField: {fileID: 712761403}
+  lastNameInputField: {fileID: 343706048}
+  nickNameInputField: {fileID: 1517135919}
+  cityInputField: {fileID: 1112868170}
+  emailInputField: {fileID: 153716030}
+  passwordInputField: {fileID: 1238372798}
+  confirmPasswordInputField: {fileID: 2011752632}
+  registerButton: {fileID: 220795025}
+  messageBoardText: {fileID: 603521528}
+  player: {fileID: 2137388936}
 --- !u!1 &1091821093
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,7 +3586,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1582653783}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 556536602}
+        m_MethodName: OnLoginButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1582653783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3856,6 +3945,7 @@ GameObject:
   - component: {fileID: 1805572745}
   - component: {fileID: 1805572744}
   - component: {fileID: 1805572743}
+  - component: {fileID: 1805572746}
   m_Layer: 5
   m_Name: Play Button
   m_TagString: Untagged
@@ -3922,7 +4012,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1805572744}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1805572746}
+        m_MethodName: OnPlayGameButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1805572744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3958,6 +4059,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805572741}
   m_CullTransparentMesh: 0
+--- !u!114 &1805572746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805572741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736d3eebd0ffab1419c4f26ce9e6ee7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1883810700
 GameObject:
   m_ObjectHideFlags: 0
@@ -3970,6 +4083,7 @@ GameObject:
   - component: {fileID: 1883810704}
   - component: {fileID: 1883810703}
   - component: {fileID: 1883810702}
+  - component: {fileID: 1883810705}
   m_Layer: 5
   m_Name: Logout Button
   m_TagString: Untagged
@@ -4036,7 +4150,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1883810703}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1883810705}
+        m_MethodName: OnLogoutButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1883810703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4072,6 +4197,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883810700}
   m_CullTransparentMesh: 0
+--- !u!114 &1883810705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883810700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200c5afe9f1c8794e91b7b251bb4ac36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginButton: {fileID: 1582653782}
+  logoutButton: {fileID: 1883810702}
+  playGameButton: {fileID: 1805572743}
+  messageBoardText: {fileID: 603521528}
+  player: {fileID: 2137388936}
 --- !u!1 &1901374370
 GameObject:
   m_ObjectHideFlags: 0
@@ -4363,8 +4505,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2011752633}
   m_TextComponent: {fileID: 430955777}
   m_Placeholder: {fileID: 780537422}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -4505,6 +4647,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2137388935}
+  - component: {fileID: 2137388936}
+  - component: {fileID: 2137388937}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4526,3 +4670,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2137388936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137388934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2346b77c7d4594e8d5fd0eee9fd1de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _token: 
+  _id: 
+  _firstName: 
+  _lastName: 
+  _nickName: 
+  _city: 
+--- !u!114 &2137388937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137388934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a279e09971fea24faf2ba5f89997449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

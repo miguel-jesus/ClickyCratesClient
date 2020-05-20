@@ -1,18 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-public class AspNetUserRegister : MonoBehaviour
+[Serializable]
+public class AspNetUserRegister
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string Email;
+    public string Password;
+    public string ConfirmPassword;
 }

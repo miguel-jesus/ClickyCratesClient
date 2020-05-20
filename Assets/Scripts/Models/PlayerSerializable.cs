@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-public class PlayerSerializable : MonoBehaviour
+[Serializable]
+public class PlayerSerializable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string Id;
+    public string FirstName;
+    public string LastName;
+    public string NickName;
+    public string City;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

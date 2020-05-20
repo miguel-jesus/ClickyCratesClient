@@ -1,18 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-public class LoginSerializable : MonoBehaviour
+[Serializable]
+public class LoginSerializable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string Id;
+    public string FirstName;
 }
