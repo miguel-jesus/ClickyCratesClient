@@ -54,9 +54,6 @@ public class Helper : MonoBehaviour
         httpClient.SetRequestHeader("Accept", "application/json");
         httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
 
-
-
-
         yield return httpClient.SendWebRequest();
 
         if (httpClient.isNetworkError || httpClient.isHttpError)

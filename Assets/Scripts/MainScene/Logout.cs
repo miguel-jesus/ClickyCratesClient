@@ -15,19 +15,15 @@ public class Logout : MonoBehaviour
     public Text messageBoardText;
     public Player player;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
     }
 
-
     public void OnLogoutButtonClicked()
     {
         TryLogout();
     }
-
-
 
     private void TryLogout()
     {
@@ -58,34 +54,4 @@ public class Logout : MonoBehaviour
         }
     }
 
-    private void CerrarLogin()
-    {
-
-        LoginSerializable loginSerializable = new LoginSerializable();
-        loginSerializable.Id = player.Id;
-        loginSerializable.FirstName = player.FirstName;
-
-        using (UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "api/Login/CerrarLogin", "POST"))
-        {
-            string bodyJson = JsonUtility.ToJson(loginSerializable);
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJson);
-
-            httpClient.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            httpClient.SetRequestHeader("Content-type", "application/json");
-            httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
-
-            httpClient.SendWebRequest();
-
-            if (httpClient.isNetworkError || httpClient.isHttpError)
-            {
-                throw new Exception("CerrarLogin > Error: " + httpClient.error);
-            }
-            else
-            {
-                Debug.Log("CerrarLogin > Info: " + httpClient.responseCode);
-            }
-
-
-        }
-    }
 }
