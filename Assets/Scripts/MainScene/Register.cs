@@ -59,7 +59,7 @@ public class Register : MonoBehaviour
         httpClient.uploadHandler = new UploadHandlerRaw(dataToSend);
 
         httpClient.SetRequestHeader("Content-Type", "application/json");
-
+        httpClient.certificateHandler = new BypassCertificate();
         yield return httpClient.SendWebRequest();
 
         if (httpClient.isNetworkError || httpClient.isHttpError)
@@ -89,6 +89,7 @@ public class Register : MonoBehaviour
             httpClient.downloadHandler = new DownloadHandlerBuffer();
             httpClient.SetRequestHeader("Content-type", "application/json");
             httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
+            httpClient.certificateHandler = new BypassCertificate();
 
             yield return httpClient.SendWebRequest();
 
