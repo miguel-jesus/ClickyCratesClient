@@ -15,10 +15,14 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
     public Button restartButton;
     public GameObject titleScreen;
+    public Text playerNameText;
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
+        player = FindObjectOfType<Player>();
         titleScreen.gameObject.SetActive(true);
+        playerNameText.text = player.FirstName.ToString();
     }
 
     // Update is called once per frame
