@@ -55,4 +55,16 @@ public class Player : MonoBehaviour
         get { return _city; }
         set { _city = value; }
     }
+    void Awake()
+    {
+        int count = FindObjectsOfType<Player>().Length;
+        if (count > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 }
