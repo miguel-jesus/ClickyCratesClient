@@ -24,6 +24,7 @@ public class Helper : MonoBehaviour
             httpClient.downloadHandler = new DownloadHandlerBuffer();
 
             httpClient.SetRequestHeader("Accept", "application/json");
+            httpClient.certificateHandler = new BypassCertificate();
 
             yield return httpClient.SendWebRequest();
 
@@ -77,6 +78,7 @@ public class Helper : MonoBehaviour
         httpClient.SetRequestHeader("Accept", "application/json");
 
         httpClient.downloadHandler = new DownloadHandlerBuffer();
+        httpClient.certificateHandler = new BypassCertificate();
 
         yield return httpClient.SendWebRequest();
 

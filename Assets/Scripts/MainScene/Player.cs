@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private const string _httpServerAddress = "http://localhost:51605/";
+    private const string _httpServerAddress = "https://localhost:44302/";
+    //private const string _httpServerAddress = "http://localhost:51605/";
     public string HttpServerAddress
     {
         get
