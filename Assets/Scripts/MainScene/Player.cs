@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,6 +43,13 @@ public class Player : MonoBehaviour
         set { _lastName = value; }
     }
 
+    public DateTime _birthday;
+    public DateTime BirthDay
+    {
+        get { return _birthday; }
+        set { _birthday = value; }
+    }
+
     public string _nickName;
     public string NickName
     {
@@ -54,6 +62,13 @@ public class Player : MonoBehaviour
     {
         get { return _city; }
         set { _city = value; }
+    }
+
+    public bool _isOnline;
+    public bool IsOnline
+    {
+        get { return _isOnline; }
+        set { _isOnline = value; }
     }
     void Awake()
     {

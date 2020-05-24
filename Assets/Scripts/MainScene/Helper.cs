@@ -94,6 +94,7 @@ public class Helper : MonoBehaviour
             player.LastName = playerSerializable.LastName;
             player.NickName = playerSerializable.NickName;
             player.City = playerSerializable.City;
+            player.BirthDay = DateTime.Parse(playerSerializable.BirthDay);
 
         }
 

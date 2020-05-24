@@ -10,6 +10,7 @@ public class Register : MonoBehaviour
 {
     public InputField firstNameInputField;
     public InputField lastNameInputField;
+    public InputField birthdateInputField;
     public InputField nickNameInputField;
     public InputField cityInputField;
     public InputField emailInputField;
@@ -35,6 +36,7 @@ public class Register : MonoBehaviour
         player.LastName = lastNameInputField.text;
         player.NickName = nickNameInputField.text;
         player.City = cityInputField.text;
+        player.BirthDay = DateTime.ParseExact(birthdateInputField.text, "yyyy-MM-dd", null);
         yield return InsertPlayer();
         messageBoardText.text += $"\nPlayer \"{player.FirstName}\" registered.";
         player.Id = string.Empty;
@@ -43,6 +45,7 @@ public class Register : MonoBehaviour
         player.LastName = string.Empty;
         player.NickName = string.Empty;
         player.City = string.Empty;
+        player.BirthDay = DateTime.MinValue;
     }
 
     private IEnumerator RegisterUser()
@@ -78,6 +81,7 @@ public class Register : MonoBehaviour
         playerSerializable.Id = player.Id;
         playerSerializable.FirstName = player.FirstName;
         playerSerializable.LastName = player.LastName;
+        playerSerializable.BirthDay = player.BirthDay.ToString();
         playerSerializable.NickName = player.NickName;
         playerSerializable.City = player.City;
 
