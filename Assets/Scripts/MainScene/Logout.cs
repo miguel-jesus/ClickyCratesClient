@@ -29,6 +29,7 @@ public class Logout : MonoBehaviour
     {
         UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "api/Account/Logout", "POST");
         httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
+        httpClient.certificateHandler = new BypassCertificate();
         httpClient.SendWebRequest();
         while (!httpClient.isDone)
         {

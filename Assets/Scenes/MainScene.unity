@@ -2524,7 +2524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20700002, y: 0.38852635}
   m_AnchorMax: {x: 0.44379607, y: 0.80200005}
-  m_AnchoredPosition: {x: 0.5, y: 1.7999992}
+  m_AnchoredPosition: {x: 0.5, y: 1.800003}
   m_SizeDelta: {x: -1.1999998, y: -1.2999992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1084748004
@@ -2564,7 +2564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstNameInputField: {fileID: 712761403}
   lastNameInputField: {fileID: 343706048}
-  birthdateInputField: {fileID: 0}
+  birthdateInputField: {fileID: 61211013}
   nickNameInputField: {fileID: 1517135919}
   cityInputField: {fileID: 1112868170}
   emailInputField: {fileID: 153716030}
@@ -3346,7 +3346,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.21257481, y: 0.172}
   m_AnchorMax: {x: 0.63036215, y: 0.36100003}
-  m_AnchoredPosition: {x: -4.8600006, y: -2.0350037}
+  m_AnchoredPosition: {x: -4.860016, y: -2.0350037}
   m_SizeDelta: {x: 2.2399902, y: 4.0700073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1369335679
@@ -4978,3 +4978,4 @@ MonoBehaviour:
   _lastName: 
   _nickName: 
   _city: 
+  _isOnline: 0
