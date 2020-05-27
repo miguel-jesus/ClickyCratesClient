@@ -82,4 +82,13 @@ public class Player : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
+    void OnApplicationQuit()
+    {
+        //Debug.Log("Application ending after " + Time.time + " seconds");
+        if (!(String.Equals(this.Token, "")))
+        {
+            StartCoroutine(Helper.UpdateInfoPlayer(false));
+        }
+    }
 }

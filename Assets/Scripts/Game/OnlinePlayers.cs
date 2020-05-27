@@ -39,7 +39,10 @@ public class OnlinePlayers : MonoBehaviour
             foreach(PlayerSerializable ps in lista.myList)
             {
                 //Debug.Log(ps.FirstName);
-                playersOnline += ps.FirstName + "\n";
+                int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+                int birthDate = int.Parse(Convert.ToDateTime(ps.BirthDay).ToString("yyyyMMdd"));
+                int age = (now - birthDate) / 10000;
+                playersOnline += ps.FirstName + " " + "("+age+ ") \n";
             }
             playersOnlineText.text = playersOnline;
         }

@@ -22,11 +22,12 @@ public class Logout : MonoBehaviour
 
     public void OnLogoutButtonClicked()
     {
-        TryLogout();
+       StartCoroutine(TryLogout());
     }
 
-    private void TryLogout()
+    private IEnumerator TryLogout()
     {
+        yield return Helper.UpdateInfoPlayer(false);
         UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "api/Account/Logout", "POST");
         httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
         httpClient.certificateHandler = new BypassCertificate();
