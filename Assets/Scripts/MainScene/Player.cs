@@ -70,6 +70,14 @@ public class Player : MonoBehaviour
         get { return _isOnline; }
         set { _isOnline = value; }
     }
+
+    public DateTime _lastLogin;
+    public DateTime LastLogin
+    {
+        get { return _lastLogin; }
+        set { _lastLogin = value; }
+    }
+
     void Awake()
     {
         int count = FindObjectsOfType<Player>().Length;

@@ -45,7 +45,6 @@ public class Register : MonoBehaviour
         player.LastName = string.Empty;
         player.NickName = string.Empty;
         player.City = string.Empty;
-        player.BirthDay = DateTime.MinValue;
     }
 
     private IEnumerator RegisterUser()

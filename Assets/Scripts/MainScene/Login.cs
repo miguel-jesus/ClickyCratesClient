@@ -14,7 +14,18 @@ public class Login : MonoBehaviour
     public Button logoutButton;
     public Button playGameButton;
     public Text messageBoardText;
-    public Player player;
+    Player player;
+    private void Start()
+    {
+        player = FindObjectOfType<Player>();
+        Debug.Log(player.Token);
+        if (!(String.Equals(player.Token, "")))
+        {
+            loginButton.interactable = false;
+            logoutButton.interactable = true;
+            playGameButton.interactable = true;
+        }
+    }
 
     public void OnLoginButtonClicked()
     {
@@ -26,13 +37,12 @@ public class Login : MonoBehaviour
         yield return Helper.InitializeToken(emailInputField.text, passwordInputField.text);
         yield return Helper.GetPlayerInfo();
         yield return Helper.UpdateInfoPlayer(true);
-        //yield return RegistrarLogin();
         messageBoardText.text += "\nWelcome " + player.FirstName + ". You are logged in!";
         loginButton.interactable = false;
         logoutButton.interactable = true;
         playGameButton.interactable = true;
     }
+   
 
 
-  
 }

@@ -10,5 +10,5 @@ public class PlayerSerializable
     public string NickName;
     public string City;
     public bool IsOnline;
-
+    public string LastLogin;
 }

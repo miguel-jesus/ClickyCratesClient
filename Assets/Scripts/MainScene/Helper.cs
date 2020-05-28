@@ -112,6 +112,7 @@ public class Helper : MonoBehaviour
         playerSerializable.NickName = player.NickName;
         playerSerializable.City = player.City;
         playerSerializable.IsOnline = isOnline;
+        playerSerializable.LastLogin = DateTime.Now.ToString();
 
 
         using (UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "/api/Player/UpdatePlayer", "POST"))

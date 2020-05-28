@@ -13,7 +13,7 @@ public class Logout : MonoBehaviour
     public Button logoutButton;
     public Button playGameButton;
     public Text messageBoardText;
-    public Player player;
+    Player player;
 
     void Start()
     {

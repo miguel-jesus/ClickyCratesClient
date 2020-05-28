@@ -10,7 +10,17 @@ public class OnlinePlayers : MonoBehaviour
     public Text playersOnlineText;
     private void Start()
     {
-        StartCoroutine(GetOnlinePlayerInfo(playersOnlineText));
+        StartCoroutine(Refresh());
+    }
+
+    private IEnumerator Refresh()
+    {
+        while (true)
+        {
+            yield return GetOnlinePlayerInfo(playersOnlineText);
+            yield return new WaitForSeconds(3);
+        }
+
     }
 
     internal static IEnumerator GetOnlinePlayerInfo(Text playersOnlineText)
@@ -32,18 +42,23 @@ public class OnlinePlayers : MonoBehaviour
             throw new Exception("Helper > GetPlayerInfo: " + httpClient.error);
         }
         else
-        {   
+        {
+            TimeSpan timeSpan ;
             string jsonResponse = httpClient.downloadHandler.text;
             string response = "{\"myList\":" + jsonResponse + "}";
             PlayerSerializableList lista = JsonUtility.FromJson<PlayerSerializableList>(response);
+
             foreach(PlayerSerializable ps in lista.myList)
             {
-                //Debug.Log(ps.FirstName);
                 int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
                 int birthDate = int.Parse(Convert.ToDateTime(ps.BirthDay).ToString("yyyyMMdd"));
                 int age = (now - birthDate) / 10000;
-                playersOnline += ps.FirstName + " " + "("+age+ ") \n";
+                DateTime lastLogin = Convert.ToDateTime(ps.LastLogin);
+                timeSpan = (DateTime.Now - lastLogin);
+
+                playersOnline += ps.FirstName + " " + "("+age+ ") \n" + timeSpan.Minutes + "' " + timeSpan.Seconds + "'' \n";
             }
+
             playersOnlineText.text = playersOnline;
         }
         httpClient.Dispose();
