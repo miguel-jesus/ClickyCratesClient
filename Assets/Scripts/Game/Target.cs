@@ -44,13 +44,31 @@ public class Target : MonoBehaviour
     }
     private void OnMouseDown()
     {
+       
         if (gameManager.isGameActive)
         {
+            if (gameObject.name == "Good 1(Clone)")
+            {
+                gameManager.UpdateBoxObjects();
+            }
+            if (gameObject.name == "Good 2(Clone)")
+            {
+                gameManager.UpdateSyntiObjects();
+            }
+            if (gameObject.name == "Good 3(Clone)")
+            {
+                gameManager.UpdateBarrelObjects();
+            }
+            if (gameObject.name == "Bad 1(Clone)")
+            {
+                gameManager.UpdateSkullObjects();
+            }
             Destroy(gameObject);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             gameManager.UpdateScore(pointValue);
         }
     }
+
     //en esta funcion destruimos los objetos que caen fuera de la pantalla
     private void OnTriggerEnter(Collider other)
     {
@@ -58,6 +76,7 @@ public class Target : MonoBehaviour
         if (!gameObject.CompareTag("Bad"))
         {
             gameManager.GameOver();
+           
         }
 
     }

@@ -156,4 +156,76 @@ public class Helper : MonoBehaviour
      * Vamos a crear este bloque de comentario para separar entre las llamadas al Player y al Objects
      * ______________________________________________________________________________________________
      */
+
+    internal static IEnumerator GetObjectsInfo()
+    {
+        Player player = FindObjectOfType<Player>();
+        Objects objects = FindObjectOfType<Objects>();
+        UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "api/Objects/GetObjectsInfo", "GET");
+
+        httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
+        httpClient.SetRequestHeader("Accept", "application/json");
+
+        httpClient.downloadHandler = new DownloadHandlerBuffer();
+        httpClient.certificateHandler = new BypassCertificate();
+
+        yield return httpClient.SendWebRequest();
+
+        if (httpClient.isNetworkError || httpClient.isHttpError)
+        {
+            throw new Exception("Helper > GetPlayerInfo: " + httpClient.error);
+        }
+        else
+        {
+            ObjectsSerializable objectsSerializable = JsonUtility.FromJson<ObjectsSerializable>(httpClient.downloadHandler.text);
+            objects.Id = objectsSerializable.Id;
+            objects.Synti = int.Parse(objectsSerializable.Synti);
+            objects.Box = int.Parse(objectsSerializable.Box);
+            objects.Barrel = int.Parse(objectsSerializable.Barrel);
+            objects.Skull = int.Parse(objectsSerializable.Skull);
+        }
+
+        httpClient.Dispose();
+    }
+
+    internal static IEnumerator UpdateInfoObjects(int synti,int barrel,int box,int skull)
+    {
+        Player player = FindObjectOfType<Player>();
+        Objects objects = FindObjectOfType<Objects>();
+
+        ObjectsSerializable objectsSerializable = new ObjectsSerializable();
+        objectsSerializable.Id = objects.Id;
+        objectsSerializable.Synti = (objects.Synti + synti).ToString();
+        objectsSerializable.Box = (objects.Box + box).ToString();
+        objectsSerializable.Barrel = (objects.Barrel + barrel).ToString();
+        objectsSerializable.Skull = (objects.Skull + skull).ToString();
+     
+        using (UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "/api/Objects/UpdateObjects", "POST"))
+        {
+            string playerData = JsonUtility.ToJson(objectsSerializable);
+
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(playerData);
+
+            httpClient.uploadHandler = new UploadHandlerRaw(bodyRaw);
+
+            httpClient.downloadHandler = new DownloadHandlerBuffer();
+
+            httpClient.SetRequestHeader("Content-type", "application/json");
+            httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
+            httpClient.certificateHandler = new BypassCertificate();
+
+            yield return httpClient.SendWebRequest();
+
+            if (httpClient.isNetworkError || httpClient.isHttpError)
+            {
+                throw new System.Exception("UpdateInfoPlayer > Error: " + httpClient.responseCode + ", Info: " + httpClient.error);
+            }
+            else
+            {
+                Debug.Log("UpdateInfoPlayer > Info: " + httpClient.responseCode);
+            }
+            httpClient.Dispose();
+        }
+
+    }
 }

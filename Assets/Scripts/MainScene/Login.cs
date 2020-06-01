@@ -18,7 +18,7 @@ public class Login : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<Player>();
-        Debug.Log(player.Token);
+        //Debug.Log(player.Token);
         if (!(String.Equals(player.Token, "")))
         {
             loginButton.interactable = false;
