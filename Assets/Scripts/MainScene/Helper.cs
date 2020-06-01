@@ -173,7 +173,7 @@ public class Helper : MonoBehaviour
 
         if (httpClient.isNetworkError || httpClient.isHttpError)
         {
-            throw new Exception("Helper > GetPlayerInfo: " + httpClient.error);
+            throw new Exception("Helper > GetObjectsInfo: " + httpClient.error);
         }
         else
         {
@@ -218,7 +218,7 @@ public class Helper : MonoBehaviour
 
             if (httpClient.isNetworkError || httpClient.isHttpError)
             {
-                throw new System.Exception("UpdateInfoPlayer > Error: " + httpClient.responseCode + ", Info: " + httpClient.error);
+                throw new System.Exception("UpdateInfoObjects > Error: " + httpClient.responseCode + ", Info: " + httpClient.error);
             }
             else
             {
