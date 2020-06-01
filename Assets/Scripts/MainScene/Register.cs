@@ -126,10 +126,10 @@ public class Register : MonoBehaviour
 
             if (httpClient.isNetworkError || httpClient.isHttpError)
             {
-                throw new Exception("RegisterNewPlayer > InsertPlayer: " + httpClient.error);
+                throw new Exception("RegisterNewPlayer > InsertObjects: " + httpClient.error);
             }
 
-            messageBoardText.text += "\nRegisterNewPlayer > InsertPlayer: " + httpClient.responseCode;
+            messageBoardText.text += "\nRegisterNewPlayer > InsertObjects: " + httpClient.responseCode;
         }
 
     }
