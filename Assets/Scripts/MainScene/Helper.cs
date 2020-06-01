@@ -202,9 +202,9 @@ public class Helper : MonoBehaviour
      
         using (UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "/api/Objects/UpdateObjects", "POST"))
         {
-            string playerData = JsonUtility.ToJson(objectsSerializable);
+            string objectsData = JsonUtility.ToJson(objectsSerializable);
 
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(playerData);
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(objectsData);
 
             httpClient.uploadHandler = new UploadHandlerRaw(bodyRaw);
 
