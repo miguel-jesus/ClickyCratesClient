@@ -38,6 +38,7 @@ public class Register : MonoBehaviour
         player.City = cityInputField.text;
         player.BirthDay = DateTime.ParseExact(birthdateInputField.text, "yyyy-MM-dd", null);
         yield return InsertPlayer();
+        yield return InsertObjects();
         messageBoardText.text += $"\nPlayer \"{player.FirstName}\" registered.";
         player.Id = string.Empty;
         player.Token = string.Empty;
@@ -88,6 +89,33 @@ public class Register : MonoBehaviour
         {
             string playerData = JsonUtility.ToJson(playerSerializable);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(playerData);
+            httpClient.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            httpClient.downloadHandler = new DownloadHandlerBuffer();
+            httpClient.SetRequestHeader("Content-type", "application/json");
+            httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
+            httpClient.certificateHandler = new BypassCertificate();
+
+            yield return httpClient.SendWebRequest();
+
+            if (httpClient.isNetworkError || httpClient.isHttpError)
+            {
+                throw new Exception("RegisterNewPlayer > InsertPlayer: " + httpClient.error);
+            }
+
+            messageBoardText.text += "\nRegisterNewPlayer > InsertPlayer: " + httpClient.responseCode;
+        }
+
+    }
+
+    private IEnumerator InsertObjects()
+    {
+        ObjectsSerializable objectsSerializable = new ObjectsSerializable();
+        objectsSerializable.Id = player.Id;
+
+        using (UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "api/Objects/InsertNewObjects", "POST"))
+        {
+            string objectsData = JsonUtility.ToJson(objectsSerializable);
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(objectsData);
             httpClient.uploadHandler = new UploadHandlerRaw(bodyRaw);
             httpClient.downloadHandler = new DownloadHandlerBuffer();
             httpClient.SetRequestHeader("Content-type", "application/json");

@@ -150,4 +150,10 @@ public class Helper : MonoBehaviour
 
     }
 
+    /*
+     * ______________________________________________________________________________________________
+     * 
+     * Vamos a crear este bloque de comentario para separar entre las llamadas al Player y al Objects
+     * ______________________________________________________________________________________________
+     */
 }
