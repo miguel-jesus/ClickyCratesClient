@@ -101,7 +101,7 @@ public class Helper : MonoBehaviour
         httpClient.Dispose();
     }
 
-    internal static IEnumerator UpdateInfoPlayer(bool isOnline)
+    internal static IEnumerator UpdateInfoPlayer(bool isOnline,DateTime hourInGame)
     {
         Player player = FindObjectOfType<Player>();
         PlayerSerializable playerSerializable = new PlayerSerializable();
@@ -113,6 +113,14 @@ public class Helper : MonoBehaviour
         playerSerializable.City = player.City;
         playerSerializable.IsOnline = isOnline;
         playerSerializable.LastLogin = DateTime.Now.ToString();
+        if(hourInGame != DateTime.MinValue)
+        {
+            playerSerializable.HourGameScene = hourInGame.ToString();
+        }
+        else
+        {
+            playerSerializable.HourGameScene = null;
+        }
 
 
         using (UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "/api/Player/UpdatePlayer", "POST"))

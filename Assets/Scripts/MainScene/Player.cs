@@ -78,6 +78,13 @@ public class Player : MonoBehaviour
         set { _lastLogin = value; }
     }
 
+    public DateTime _hourGameScene;
+    public DateTime HourGameScene
+    {
+        get { return _hourGameScene; }
+        set { _hourGameScene = value; }
+    }
+
     void Awake()
     {
         int count = FindObjectsOfType<Player>().Length;
@@ -96,7 +103,7 @@ public class Player : MonoBehaviour
         //Debug.Log("Application ending after " + Time.time + " seconds");
         if (!(String.Equals(this.Token, "")))
         {
-            StartCoroutine(Helper.UpdateInfoPlayer(false));
+            StartCoroutine(Helper.UpdateInfoPlayer(false, DateTime.MinValue));
         }
     }
 }

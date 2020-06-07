@@ -11,4 +11,5 @@ public class PlayerSerializable
     public string City;
     public bool IsOnline;
     public string LastLogin;
+    public string HourGameScene;
 }

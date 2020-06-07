@@ -36,7 +36,7 @@ public class Login : MonoBehaviour
     {
         yield return Helper.InitializeToken(emailInputField.text, passwordInputField.text);
         yield return Helper.GetPlayerInfo();
-        yield return Helper.UpdateInfoPlayer(true);
+        yield return Helper.UpdateInfoPlayer(true,DateTime.MinValue);
         messageBoardText.text += "\nWelcome " + player.FirstName + ". You are logged in!";
         loginButton.interactable = false;
         logoutButton.interactable = true;
