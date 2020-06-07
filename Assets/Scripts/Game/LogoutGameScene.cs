@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class Logout : MonoBehaviour
+public class LogoutGameScene : MonoBehaviour
 {
-    public Button loginButton;
-    public Button logoutButton;
-    public Button playGameButton;
-    public Text messageBoardText;
     Player player;
-
     void Start()
     {
         player = FindObjectOfType<Player>();
@@ -23,7 +16,8 @@ public class Logout : MonoBehaviour
 
     public void OnLogoutButtonClicked()
     {
-       StartCoroutine(TryLogout());
+        StartCoroutine(TryLogout());
+
     }
 
     private IEnumerator TryLogout()
@@ -50,11 +44,7 @@ public class Logout : MonoBehaviour
             player.LastName = string.Empty;
             player.NickName = string.Empty;
             player.City = string.Empty;
-            messageBoardText.text += $"\n{httpClient.responseCode} Bye bye {player.Id}.";
-            loginButton.interactable = true;
-            logoutButton.interactable = false;
-            playGameButton.interactable = false;
+            SceneManager.LoadScene(0);
         }
     }
-
 }
