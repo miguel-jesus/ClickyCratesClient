@@ -112,15 +112,19 @@ public class Helper : MonoBehaviour
         playerSerializable.NickName = player.NickName;
         playerSerializable.City = player.City;
         playerSerializable.IsOnline = isOnline;
-        playerSerializable.LastLogin = DateTime.Now.ToString();
-        if(hourInGame != DateTime.MinValue)
+        if(player.LastLogin == DateTime.MinValue)
         {
-            playerSerializable.HourGameScene = hourInGame.ToString();
+            playerSerializable.LastLogin = DateTime.Now.ToString();
+            player.LastLogin = DateTime.Now;
         }
         else
         {
-            playerSerializable.HourGameScene = null;
+            playerSerializable.LastLogin = player.LastLogin.ToString();
         }
+        
+        playerSerializable.HourGameScene = hourInGame.ToString();
+        player.HourGameScene = DateTime.Parse(playerSerializable.HourGameScene);
+
 
 
         using (UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "/api/Player/UpdatePlayer", "POST"))
@@ -152,6 +156,7 @@ public class Helper : MonoBehaviour
                 player.NickName = playerSerializable.NickName;
                 player.City = playerSerializable.City;
                 player.BirthDay = DateTime.Parse(playerSerializable.BirthDay);
+              
             }
             httpClient.Dispose();
         }
