@@ -40,7 +40,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        syntiScoreText.text = (objects.Synti + synti).ToString();
+        boxScoreText.text = (objects.Box + box).ToString();
+        barrelScoreext.text = (objects.Barrel + barrel).ToString();
+        skullScoreText.text = (objects.Skull + skull).ToString();
     }
     private IEnumerator SpawnTarget()
     {
