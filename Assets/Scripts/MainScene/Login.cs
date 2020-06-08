@@ -34,13 +34,37 @@ public class Login : MonoBehaviour
 
     private IEnumerator TryLogin()
     {
+       
         yield return Helper.InitializeToken(emailInputField.text, passwordInputField.text);
-        yield return Helper.GetPlayerInfo();
-        yield return Helper.UpdateInfoPlayer(true,DateTime.MinValue);
-        messageBoardText.text += "\nWelcome " + player.FirstName + ". You are logged in!";
-        loginButton.interactable = false;
-        logoutButton.interactable = true;
-        playGameButton.interactable = true;
+        yield return Helper.GetPlayerInfo(); 
+        Debug.Log(player.IsBanned);
+        if (player.IsBanned)
+        {
+            TimeSpan timeSpan = DateTime.Now - player.BannedHour;
+            if (timeSpan.TotalMinutes > 10)
+            {
+                yield return Helper.UpdateBan();
+                yield return Helper.UpdateInfoPlayer(true, DateTime.MinValue);
+                messageBoardText.text += "\nWelcome " + player.FirstName + ". You are logged in!";
+                loginButton.interactable = false;
+                logoutButton.interactable = true;
+                playGameButton.interactable = true;
+            }
+            else
+            {
+                yield return Logout.TryLogout(messageBoardText, loginButton, logoutButton, playGameButton);
+            }
+           
+        }
+        else
+        {
+            yield return Helper.UpdateInfoPlayer(true,DateTime.MinValue);
+            messageBoardText.text += "\nWelcome " + player.FirstName + ". You are logged in!";
+            loginButton.interactable = false;
+            logoutButton.interactable = true;
+            playGameButton.interactable = true;
+        }
+        
     }
    
 

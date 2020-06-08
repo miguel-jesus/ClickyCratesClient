@@ -12,4 +12,6 @@ public class PlayerSerializable
     public bool IsOnline;
     public string LastLogin;
     public string HourGameScene;
+    public bool IsBanned;
+    public string BannedHour;
 }

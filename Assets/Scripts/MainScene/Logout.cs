@@ -14,20 +14,21 @@ public class Logout : MonoBehaviour
     public Button logoutButton;
     public Button playGameButton;
     public Text messageBoardText;
-    Player player;
+    
 
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        
     }
 
     public void OnLogoutButtonClicked()
     {
-       StartCoroutine(TryLogout());
+       StartCoroutine(TryLogout(messageBoardText, loginButton, logoutButton, playGameButton));
     }
 
-    private IEnumerator TryLogout()
+    public static IEnumerator TryLogout(Text messageBoardText,Button loginButton,Button logoutButton,Button playGameButton)
     {
+        Player player = FindObjectOfType<Player>();
         yield return Helper.UpdateInfoPlayer(false, DateTime.MinValue);
         UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "api/Account/Logout", "POST");
         httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);

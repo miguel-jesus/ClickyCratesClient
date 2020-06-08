@@ -55,8 +55,9 @@ public class OnlinePlayers : MonoBehaviour
                 int age = (now - birthDate) / 10000;
                 DateTime lastLogin = Convert.ToDateTime(ps.LastLogin);
                 timeSpan = (DateTime.Now - lastLogin);
+                int minutes = (int)timeSpan.TotalMinutes;
 
-                playersOnline += ps.FirstName + " " + "("+age+ ") \n" + timeSpan.Minutes + "' " + timeSpan.Seconds + "'' \n";
+                playersOnline += ps.FirstName + " " + "("+age+ ") \n" + minutes + "' " + timeSpan.Seconds + "'' \n";
             }
 
             playersOnlineText.text = playersOnline;

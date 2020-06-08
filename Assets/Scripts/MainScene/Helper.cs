@@ -7,8 +7,17 @@ using UnityEngine.Networking;
 
 public class Helper : MonoBehaviour
 {
+    public static bool isAdmin = false;
     internal static IEnumerator InitializeToken(string email, string password)
     {
+        if (email.Equals("admin@fmail.com"))
+        {
+            isAdmin = true;
+        }
+        else
+        {
+            isAdmin = false;
+        }
         Player player = FindObjectOfType<Player>();
         if (string.IsNullOrEmpty(player.Token))
         {
@@ -95,7 +104,13 @@ public class Helper : MonoBehaviour
             player.NickName = playerSerializable.NickName;
             player.City = playerSerializable.City;
             player.BirthDay = DateTime.Parse(playerSerializable.BirthDay);
-
+            player.IsOnline = playerSerializable.IsOnline;
+            player.IsBanned = playerSerializable.IsBanned;
+            if (playerSerializable.IsBanned)
+            {
+               player.BannedHour = DateTime.Parse(playerSerializable.BannedHour);
+            }
+            
         }
 
         httpClient.Dispose();
@@ -124,6 +139,8 @@ public class Helper : MonoBehaviour
         
         playerSerializable.HourGameScene = hourInGame.ToString();
         player.HourGameScene = DateTime.Parse(playerSerializable.HourGameScene);
+        playerSerializable.IsBanned = player.IsBanned;
+        playerSerializable.BannedHour = player.BannedHour.ToString();
 
 
 
@@ -157,6 +174,59 @@ public class Helper : MonoBehaviour
                 player.City = playerSerializable.City;
                 player.BirthDay = DateTime.Parse(playerSerializable.BirthDay);
               
+            }
+            httpClient.Dispose();
+        }
+
+    }
+
+    internal static IEnumerator UpdateBan()
+    {
+        Player player = FindObjectOfType<Player>();
+        PlayerSerializable playerSerializable = new PlayerSerializable();
+        playerSerializable.Id = player.Id;
+        playerSerializable.FirstName = player.FirstName;
+        playerSerializable.LastName = player.LastName;
+        playerSerializable.BirthDay = player.BirthDay.ToString();
+        playerSerializable.NickName = player.NickName;
+        playerSerializable.City = player.City;
+        playerSerializable.IsOnline = player.IsOnline;
+        playerSerializable.LastLogin = player.LastLogin.ToString();
+        playerSerializable.HourGameScene = player.HourGameScene.ToString();
+        playerSerializable.IsBanned = false;
+        player.IsBanned = false;
+
+
+        using (UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "/api/Player/UpdatePlayer", "POST"))
+        {
+            string playerData = JsonUtility.ToJson(playerSerializable);
+
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(playerData);
+
+            httpClient.uploadHandler = new UploadHandlerRaw(bodyRaw);
+
+            httpClient.downloadHandler = new DownloadHandlerBuffer();
+
+            httpClient.SetRequestHeader("Content-type", "application/json");
+            httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
+            httpClient.certificateHandler = new BypassCertificate();
+
+            yield return httpClient.SendWebRequest();
+
+            if (httpClient.isNetworkError || httpClient.isHttpError)
+            {
+                throw new System.Exception("UpdateBan > Error: " + httpClient.responseCode + ", Info: " + httpClient.error);
+            }
+            else
+            {
+                Debug.Log("UpdateBan > Info: " + httpClient.responseCode);
+                player.Id = playerSerializable.Id;
+                player.FirstName = playerSerializable.FirstName;
+                player.LastName = playerSerializable.LastName;
+                player.NickName = playerSerializable.NickName;
+                player.City = playerSerializable.City;
+                player.BirthDay = DateTime.Parse(playerSerializable.BirthDay);
+
             }
             httpClient.Dispose();
         }

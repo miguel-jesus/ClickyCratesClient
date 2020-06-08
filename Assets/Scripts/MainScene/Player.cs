@@ -85,6 +85,20 @@ public class Player : MonoBehaviour
         set { _hourGameScene = value; }
     }
 
+    public bool _isBanned;
+    public bool IsBanned
+    {
+        get { return _isBanned; }
+        set { _isBanned = value; }
+    }
+
+    public DateTime _bannedHour;
+    public DateTime BannedHour
+    {
+        get { return _bannedHour; }
+        set { _bannedHour = value; }
+    }
+
     void Awake()
     {
         int count = FindObjectsOfType<Player>().Length;
