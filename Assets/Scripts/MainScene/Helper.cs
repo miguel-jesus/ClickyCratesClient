@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class Helper : MonoBehaviour
 {
     public static bool isAdmin = false;
+    private void OnGUI()
+    {
+    }
     internal static IEnumerator InitializeToken(string email, string password)
     {
         if (email.Equals("admin@fmail.com"))
@@ -106,6 +110,15 @@ public class Helper : MonoBehaviour
             player.BirthDay = DateTime.Parse(playerSerializable.BirthDay);
             player.IsOnline = playerSerializable.IsOnline;
             player.IsBanned = playerSerializable.IsBanned;
+            if (playerSerializable.HourGameScene.Equals(null) || playerSerializable.HourGameScene.Equals(""))
+            {
+                player.HourGameScene = DateTime.MinValue;
+            }
+            else
+            {
+               player.HourGameScene = DateTime.Parse(playerSerializable.HourGameScene);
+            }
+           
             if (playerSerializable.IsBanned)
             {
                player.BannedHour = DateTime.Parse(playerSerializable.BannedHour);
