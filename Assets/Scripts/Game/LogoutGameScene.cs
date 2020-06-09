@@ -8,10 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class LogoutGameScene : MonoBehaviour
 {
-    Player player;
+
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        
     }
 
     public void OnLogoutButtonClicked()
@@ -20,8 +20,9 @@ public class LogoutGameScene : MonoBehaviour
 
     }
 
-    private IEnumerator TryLogout()
+    public static IEnumerator TryLogout()
     {
+        Player player = FindObjectOfType<Player>();
         yield return Helper.UpdateInfoPlayer(false, DateTime.MinValue);
         UnityWebRequest httpClient = new UnityWebRequest(player.HttpServerAddress + "api/Account/Logout", "POST");
         httpClient.SetRequestHeader("Authorization", "bearer " + player.Token);
