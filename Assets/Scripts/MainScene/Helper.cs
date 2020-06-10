@@ -43,6 +43,9 @@ public class Helper : MonoBehaviour
 
             if (httpClient.isNetworkError || httpClient.isHttpError)
             {
+                var errorMessage = httpClient.downloadHandler.text;
+                ErrorLoginSerializable error = JsonUtility.FromJson<ErrorLoginSerializable>(errorMessage);
+                Register.MessageError(error.error_description);
                 throw new Exception("Helper > InitToken: " + httpClient.error);
             }
             else

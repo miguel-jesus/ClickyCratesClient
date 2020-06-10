@@ -62,11 +62,30 @@ public class Register : MonoBehaviour
         httpClient.uploadHandler = new UploadHandlerRaw(dataToSend);
 
         httpClient.SetRequestHeader("Content-Type", "application/json");
+        httpClient.downloadHandler = new DownloadHandlerBuffer();
         httpClient.certificateHandler = new BypassCertificate();
         yield return httpClient.SendWebRequest();
 
         if (httpClient.isNetworkError || httpClient.isHttpError)
         {
+            // Debug.Log(httpClient.downloadHandler.text.Substring(95,39));
+
+            var errorMessage = httpClient.downloadHandler.text;
+            if (errorMessage.Contains("Info"))
+            {
+            ErrorSerializable error = JsonUtility.FromJson<ErrorSerializable>(errorMessage);
+            Debug.Log(error.ModelState.Info[1]);
+            Register.MessageError(error.ModelState.Info[1]);
+            }
+            else if ("".Equals(emailInputField.text) || "".Equals(passwordInputField.text) || "".Equals(confirmPasswordInputField.text))
+            {
+                Register.MessageError("Email,Password and Confirm Password are required fields");
+            }
+            else
+            {
+                Register.MessageError("Password and Confirm Password not match");
+            }
+            
             throw new Exception("RegisterUser> Error: " + httpClient.error);
         }
 
@@ -132,5 +151,11 @@ public class Register : MonoBehaviour
             messageBoardText.text += "\nRegisterNewPlayer > InsertObjects: " + httpClient.responseCode;
         }
 
+    }
+
+    public static void MessageError(string message)
+    {
+        Text messageBoardText = GameObject.Find("Message Board Text").GetComponent<Text>();
+        messageBoardText.text = message;
     }
 }
